@@ -1,4 +1,5 @@
 # AsisT - Sistema de Gestión de Reportes Sociales
+
 Sistema de gestión de reportes sociales desarrollado con React en el frontend y Spring Boot en el backend.
 
 ## Estructura del Proyecto
@@ -21,9 +22,10 @@ AsisT/
 │                       │   ├── ReportRepository.java # Repositorio de Report
 │                       │   └── UserRepository.java   # Repositorio de User
 │                       ├── service/                 # Servicios de negocio
-│                       │   └── UserService.java     # Servicio de usuarios
+│                       │   ├── UserService.java     # Servicio de usuarios
+│                       │   └── JwtService.java      # Servicio para generación/validación de JWT
 │                       └── config/                  # Configuraciones
-│                           └── SecurityConfig.java  # Configuración de seguridad
+│                           └── SecurityConfig.java  # Configuración de seguridad avanzada (JWT + CORS)
 └── frontend/         # Aplicación React
     ├── public/
     └── src/
@@ -32,107 +34,100 @@ AsisT/
 ## Backend - Spring Boot
 
 ### Seguridad y Autenticación (JWT)
-Esta aplicación implementa endpoints de autenticación básicos con generación de JSON Web Tokens (JWT) usando la librería jjwt.
+El backend implementa autenticación basada en JWT con configuración de seguridad avanzada.
 
-- Controlador: backend/src/main/java/com/asist/controller/AuthController.java
-- Librerías: jjwt (io.jsonwebtoken:jjwt-api/jjwt-impl/jjwt-jackson) y BCrypt para hashing de contraseñas.
+Componentes clave:
+- JwtService: generación, validación, expiración y refresh tokens
+- SecurityConfig: HTTP stateless, filtro JwtAuthenticationFilter, CORS, CSRF disabled
+- AuthController: registro, login y refresh-token. Devuelve accessToken, refreshToken y detalles de usuario
 
-#### Endpoints
+Endpoints públicos:
 - POST /api/auth/register
-  - Descripción: Registrar un nuevo usuario.
-  - Body JSON: { "username": "string", "email": "string", "password": "string" }
-  - Lógica: Hashea la contraseña con BCrypt y almacena el usuario.
-  - Respuestas: 200 OK (registro exitoso) | 400 Bad Request (validación) | 500 Error.
-
 - POST /api/auth/login
-  - Descripción: Autenticar un usuario y devolver un JWT.
-  - Body JSON: { "username": "string", "password": "string" }
-  - Lógica: Valida credenciales, compara contraseña con BCrypt y genera un JWT HS512 con expiración de 24h.
-  - Respuestas: 200 OK { token, tokenType: "Bearer", username, email } | 401 Unauthorized | 500 Error.
+- POST /api/auth/refresh-token
+- Swagger: /v3/api-docs/**, /swagger-ui/**, /swagger-ui.html
 
-#### Flujo de Autenticación
+Resto de endpoints: protegidos con JWT (Authorization: Bearer <token>)
+
+### Flujo de Autenticación
 1) Registro
-   - Cliente envía POST /api/auth/register con username, email, password.
-   - Backend hashea password con BCrypt y registra el usuario.
+- Request: POST /api/auth/register { username, email, password }
+- Acciones: valida datos, hashea contraseña (BCrypt 12), persiste usuario
+- Respuesta: 201 Created con { accessToken, refreshToken, user: { id, email, username } }
+
 2) Login
-   - Cliente envía POST /api/auth/login con username y password.
-   - Backend valida credenciales y responde con un JWT Bearer.
-3) Acceso a endpoints protegidos
-   - El cliente incluye el header Authorization: Bearer <JWT> en cada petición.
-   - El backend valida el token (firma y expiración) antes de procesar.
+- Request: POST /api/auth/login { email, password }
+- Acciones: autentica con AuthenticationManager, genera tokens vía JwtService
+- Respuesta: 200 OK con { accessToken, refreshToken, user }
 
-Nota: En esta versión de ejemplo, AuthController usa un almacenamiento en memoria para usuarios y un SecretKey generado en tiempo de ejecución (Keys.secretKeyFor). En producción, usa una base de datos para usuarios y configura la clave secreta vía propiedades/entorno.
+3) Refresh Token
+- Request: POST /api/auth/refresh-token { refreshToken }
+- Acciones: valida refresh, emite nuevo accessToken
+- Respuesta: 200 OK { accessToken }
 
-#### Configuración recomendada de jjwt (pom.xml)
-Dependencias típicas:
-- io.jsonwebtoken:jjwt-api
-- io.jsonwebtoken:jjwt-impl (scope runtime)
-- io.jsonwebtoken:jjwt-jackson (scope runtime)
+4) Acceso a endpoints protegidos
+- Header: Authorization: Bearer <accessToken>
+- El filtro JwtAuthenticationFilter valida firma, expiración y setea el contexto de seguridad
 
-#### Headers de ejemplo
-- Autenticación: Authorization: Bearer <token>
-- Content-Type: application/json
+### Buenas prácticas de seguridad
+- No almacenar secretos en el código: usar variables de entorno o vault (jwt.secret)
+- Usar llaves de al menos 256 bits para HS256 (base64)
+- Rotación de claves y expiraciones cortas (access ~15m, refresh ~7d) según necesidades
+- HTTP Strict Transport Security (HSTS) y solo HTTPS en producción
+- CORS restringido por entorno (dominios permitidos específicos)
+- Validación de entrada con Bean Validation y sanitización de datos
+- BCrypt con factor de coste >= 12
+- Sesiones stateless y CSRF deshabilitado para APIs REST
+- Limitar exposición de datos de usuario en respuestas
+- Logs seguros: no registrar tokens completos ni contraseñas
 
-### Entidades
-#### Report Entity
-La entidad Report representa un reporte social en el sistema.
-Ubicación: `backend/src/main/java/com/asist/model/Report.java`
-Campos:
-- id (Long) - Identificador único, generado automáticamente
-- title (String) - Título del reporte (obligatorio)
-- description (String) - Descripción detallada del reporte
-- location (String) - Ubicación donde ocurrió el incidente (obligatorio)
-- date (LocalDateTime) - Fecha y hora del reporte (obligatorio)
-- userId (Long) - ID del usuario que creó el reporte (obligatorio)
+### Pruebas con Postman
+Colección de pruebas sugerida:
+- Auth - Register
+  - POST http://localhost:8080/api/auth/register
+  - Body (JSON): { "username":"alice", "email":"alice@example.com", "password":"Secreta123!" }
+- Auth - Login
+  - POST http://localhost:8080/api/auth/login
+  - Body (JSON): { "email":"alice@example.com", "password":"Secreta123!" }
+  - Tests: guardar accessToken y refreshToken en variables de entorno de Postman
+- Auth - Refresh Token
+  - POST http://localhost:8080/api/auth/refresh-token
+  - Body (JSON): { "refreshToken":"{{refreshToken}}" }
+- Users - Protected (ejemplo)
+  - GET http://localhost:8080/api/users
+  - Header: Authorization: Bearer {{accessToken}}
 
-### Repositorios
-... (contenido existente) ...
+Sugerencias de scripts Postman:
+- Tests de login: pm.environment.set("accessToken", pm.response.json().accessToken)
+- Tests de login: pm.environment.set("refreshToken", pm.response.json().refreshToken)
 
-## API REST - Resumen de Endpoints
-### Usuarios
-- GET /api/users — Obtener todos los usuarios
-- GET /api/users/{id} — Obtener usuario por ID
-- POST /api/users — Registrar nuevo usuario
-- PUT /api/users/{id} — Actualizar usuario
-- DELETE /api/users/{id} — Eliminar usuario
+### Cómo proteger endpoints con JWT
+- En SecurityConfig, los endpoints no listados como permitAll requieren autenticación
+- Añade @PreAuthorize("hasRole('ADMIN')") en métodos que requieran rol
+- En controladores, no es necesario extraer manualmente el usuario; usar SecurityContextHolder
 
-### Reportes
-- GET /api/reports — Obtener todos los reportes
-- GET /api/reports/{id} — Obtener reporte por ID
-- POST /api/reports — Crear nuevo reporte
-- PUT /api/reports/{id} — Actualizar reporte
-- DELETE /api/reports/{id} — Eliminar reporte
+### Configuración (application.yml ejemplo)
+```
+jwt:
+  secret: ${JWT_SECRET_BASE64}
+  expiration: 900000        # 15 minutos
+  refresh-expiration: 604800000  # 7 días
+spring:
+  security:
+    filter:
+      dispatcher-types: REQUEST
+```
+
+### Dependencias (pom.xml)
+- Spring Security
+- jjwt-api, jjwt-impl (runtime), jjwt-jackson (runtime)
+- spring-boot-starter-validation
+- spring-boot-starter-web, spring-boot-starter-data-jpa
 
 ## Frontend - React
-Aplicación React para la interfaz de usuario del sistema de gestión de reportes.
-
-## Tecnologías
-### Backend
-- Java, Spring Boot, Spring Security, Spring Data JPA, BCrypt, jjwt
-### Frontend
-- React, CSS, HTML, JavaScript
-
-## Instalación y Configuración
-### Requisitos Previos
-- Java 17 o superior
-- Node.js y npm
-- Base de datos (H2, MySQL, PostgreSQL, etc.)
-
-### Backend
-```
-cd backend
-./mvnw spring-boot:run
-```
-
-### Frontend
-```
-cd frontend
-npm install
-npm start
-```
-
-## Contribución
-Este proyecto es parte de un Trabajo de Fin de Carrera (TFC) centrado en la gestión de reportes sociales.
+- Consumir endpoints de autenticación
+- Guardar tokens en memoria/secure httpOnly cookie (preferible httpOnly cookies para refresh)
+- Enviar Authorization: Bearer accessToken en peticiones protegidas
 
 ## Licencia
-[Especificar licencia según corresponda]
+[Especificar licencia]
