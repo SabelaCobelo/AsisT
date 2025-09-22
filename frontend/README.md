@@ -1,4 +1,6 @@
-# 🎨 AsisT Frontend - Interfaz Web Intuitiva
+# 🌆 AsisT Frontend - Interfaz Web Intuitiva
+
+> Construyendo ciudades más inteligentes, participativas y humanas. 💡🤝🏙️
 
 ### Plataforma colaborativa para gestión urbana con React moderno
 
@@ -12,11 +14,9 @@
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 ## 🚀 Descripción
-
 AsisT Frontend es una **interfaz web moderna e intuitiva** desarrollada con React que permite a ciudadanos y administraciones gestionar reportes urbanos de forma colaborativa. Diseñada con **UX/UI centrado en el usuario** para maximizar la participación ciudadana y eficiencia administrativa.
 
 ### ✨ Características Destacadas
-
 - 🎯 **Interfaz Intuitiva** - Diseño limpio y accesible para todos los usuarios
 - 📱 **Responsive Design** - Adaptado para móviles, tablets y escritorio
 - ⚡ **Performance Optimizado** - Carga rápida y navegación fluida
@@ -27,13 +27,13 @@ AsisT Frontend es una **interfaz web moderna e intuitiva** desarrollada con Reac
 ## ⚡ Instalación Rápida
 
 ### Prerrequisitos
+✅ Node.js 16+
 
-✅ Node.js 16+  
-✅ npm 8+ o yarn  
+✅ npm 8+ o yarn
+
 ✅ Git
 
 ### 🚀 Inicio en 3 pasos
-
 ```bash
 # 1️⃣ Clonar y navegar
 git clone https://github.com/SabelaCobelo/AsisT.git
@@ -45,20 +45,17 @@ npm install
 # 3️⃣ Ejecutar en desarrollo
 npm start
 ```
-
 🌐 **La aplicación estará disponible en:** `http://localhost:3000`
 
 ### 📋 Comandos Adicionales
-
-| Comando | Descripción | Estado |
-|---------|-------------|--------|
-| `npm start` | 🔧 Servidor de desarrollo | ✅ |
-| `npm test` | 🧪 Ejecutar pruebas | ✅ |
-| `npm run build` | 📦 Build de producción | ✅ |
-| `npm run eject` | ⚙️ Exponer configuración | ⚠️ |
+| Comando       | Descripción                 | Estado |
+|---------------|-----------------------------|--------|
+| `npm start`   | 🔧 Servidor de desarrollo   | ✅     |
+| `npm test`    | 🧪 Ejecutar pruebas         | ✅     |
+| `npm run build` | 📦 Build de producción    | ✅     |
+| `npm run eject` | ⚙️ Exponer configuración  | ⚠️     |
 
 ## 🏗️ Arquitectura del Proyecto
-
 ```
 frontend/
 ├── 📁 public/
@@ -70,61 +67,141 @@ frontend/
 │   │   ├── Header/         # 🎯 Navegación principal
 │   │   ├── ReportCard/     # 📄 Tarjetas de reportes
 │   │   └── UserPanel/      # 👤 Panel de usuario
-│   ├── 📁 pages/          # 📑 Páginas principales
+│   ├── 📁 pages/           # 📑 Páginas principales
 │   │   ├── Dashboard/      # 📊 Panel de control
 │   │   ├── Reports/        # 📋 Gestión de reportes
 │   │   └── Profile/        # 👨‍💻 Perfil de usuario
-│   ├── 📁 services/       # 🔌 Servicios API
-│   ├── 📁 styles/         # 🎨 Estilos globales
-│   ├── App.js             # 🚀 Componente raíz
-│   └── index.js           # 🎯 Punto de entrada
-├── package.json           # 📦 Dependencias
-└── README.md             # 📖 Esta documentación
+│   ├── 📁 services/        # 🔌 Servicios API
+│   ├── 📁 styles/          # 🎨 Estilos globales
+│   ├── App.js              # 🚀 Componente raíz
+│   └── index.js            # 🎯 Punto de entrada
+├── package.json            # 📦 Dependencias
+└── README.md               # 📖 Esta documentación
 ```
 
 ## 🎯 Funcionalidades Esenciales
+| Funcionalidad         | Descripción                                 | Prioridad | Estado |
+|-----------------------|---------------------------------------------|----------|--------|
+| 🏠 Dashboard          | Panel principal con métricas y resumen      | Alta     | ✅     |
+| 📋 Gestión de Reportes| CRUD completo de incidencias urbanas        | Alta     | ✅     |
+| 👤 Autenticación      | Login/registro con JWT                      | Alta     | 🚧     |
+| 🗺️ Mapas Interactivos | Geolocalización de reportes                 | Media    | 📋     |
+| 📊 Analytics          | Estadísticas y métricas visuales            | Media    | 📋     |
+| 🔔 Notificaciones     | Alertas en tiempo real                      | Baja     | 📋     |
 
-| Funcionalidad | Descripción | Prioridad | Estado |
-|---------------|-------------|-----------|--------|
-| 🏠 **Dashboard** | Panel principal con métricas y resumen | Alta | ✅ |
-| 📋 **Gestión de Reportes** | CRUD completo de incidencias urbanas | Alta | ✅ |
-| 👤 **Autenticación** | Login/registro con JWT | Alta | 🚧 |
-| 🗺️ **Mapas Interactivos** | Geolocalización de reportes | Media | 📋 |
-| 📊 **Analytics** | Estadísticas y métricas visuales | Media | 📋 |
-| 🔔 **Notificaciones** | Alertas en tiempo real | Baja | 📋 |
+## 🖼️ Demo Visual (Ejemplos y Guía)
+> Próximamente se añadirán capturas y GIFs reales del producto. Mientras tanto, usa estos placeholders y guía para contribuir.
+
+### 📸 Placeholders de Imágenes/GIFs
+- Dashboard (desktop): `docs/demo/dashboard-desktop.png`
+- Flujo de creación de reporte (GIF): `docs/demo/crear-reporte.gif`
+- Vista móvil: `docs/demo/dashboard-mobile.png`
+
+Muestra rápida en Markdown:
+```md
+![📸 Dashboard (Desktop)](docs/demo/dashboard-desktop.png)
+![🎬 Crear Reporte (Flujo)](docs/demo/crear-reporte.gif)
+![📱 Vista Móvil](docs/demo/dashboard-mobile.png)
+```
+
+### ⬆️ ¿Cómo subir imágenes/GIFs?
+1. Crea las carpetas si no existen: `mkdir -p docs/demo`.
+2. Arrastra y suelta los archivos en GitHub o añade por Git:
+   ```bash
+   git add docs/demo/dashboard-desktop.png docs/demo/crear-reporte.gif docs/demo/dashboard-mobile.png
+   git commit -m "docs(demo): agrega capturas y gif de demo"
+   git push origin main
+   ```
+3. Usa rutas relativas en el README como en los ejemplos anteriores.
+4. Para GIFs optimizados, usa 800px de ancho máximo y comprímelos (por ejemplo, ezgif.com o gifski).
+
+### 🧩 Ejemplo de Componentes (con Emojis)
+A continuación, snippets representativos manteniendo el estilo visual:
+
+- Header (🎯 navegación principal):
+```jsx
+// src/components/Header/index.jsx
+export default function Header() {
+  return (
+    <header className="app-header">
+      <h1>AsisT 🏙️</h1>
+      <nav>
+        <a href="/">🏠 Inicio</a>
+        <a href="/reports">📋 Reportes</a>
+        <a href="/profile">👤 Perfil</a>
+      </nav>
+    </header>
+  );
+}
+```
+
+- ReportCard (📄 tarjeta de reporte):
+```jsx
+// src/components/ReportCard/index.jsx
+export function ReportCard({ title, status, location }) {
+  const statusIcon = {
+    open: "🟢",
+    in_progress: "🟡",
+    closed: "🔵",
+  }[status] ?? "⚪";
+
+  return (
+    <article className="report-card">
+      <h3>{statusIcon} {title}</h3>
+      <p>📍 {location}</p>
+      <button>👁️ Ver detalle</button>
+    </article>
+  );
+}
+```
+
+- UserPanel (👤 acciones rápidas):
+```jsx
+// src/components/UserPanel/index.jsx
+export function UserPanel({ user }) {
+  return (
+    <aside className="user-panel">
+      <p>Hola, {user.name} 👋</p>
+      <button>➕ Crear reporte</button>
+      <button>🧾 Mis reportes</button>
+      <button>🚪 Cerrar sesión</button>
+    </aside>
+  );
+}
+```
+
+## 🧭 Casos de Uso: Ciudadanía vs. Administración
+| Escenario real | Ciudadanía (👥) | Administración (🏛️) |
+|---|---|---|
+| Bache en la vía | Reporta con foto y ubicación en 30s. | Recibe ticket, prioriza por severidad y asigna cuadrilla. |
+| Farola averiada | Sigue el estado del arreglo en tiempo real. | Reagrupa incidencias por zona y planifica ruta nocturna. |
+| Residuos en parque | Vota y comenta para aumentar prioridad. | Programa limpieza y comunica resolución al ciudadano. |
 
 ## 🎨 Demo Visual
-
-> 🚧 **Capturas de pantalla y GIFs coming soon!**
->
-> Próximamente disponibles:
-> - 📸 Screenshots del dashboard principal
-> - 🎬 GIF demostrando el flujo de creación de reportes
-> - 📱 Capturas de la versión móvil
+> 🚧 Capturas de pantalla y GIFs coming soon!
+- 📸 Screenshots del dashboard principal
+- 🎬 GIF demostrando el flujo de creación de reportes
+- 📱 Capturas de la versión móvil
 
 ## 💡 UX/UI y Motivación Social
 
 ### 🎯 Experiencia de Usuario
-
-**"Diseñado para empoderar la participación ciudadana"**
-
+"Diseñado para empoderar la participación ciudadana"
 Nuestro enfoque UX se basa en:
-
-- 🧠 **Psicología Cognitiva** - Interfaces que reducen la carga mental
-- 🎨 **Design System** - Consistencia visual en toda la aplicación
-- ♿ **Accesibilidad** - Cumplimiento WCAG 2.1 AA
-- 📊 **Data-Driven** - Decisiones basadas en analytics de usuario
+- 🧠 Psicología Cognitiva - Interfaces que reducen la carga mental
+- 🎨 Design System - Consistencia visual en toda la aplicación
+- ♿ Accesibilidad - Cumplimiento WCAG 2.1 AA
+- 📊 Data-Driven - Decisiones basadas en analytics de usuario
 
 ### 🌍 Impacto Social
+"Construyendo puentes digitales entre ciudadanía y administración"
 
-> *"Construyendo puentes digitales entre ciudadanía y administración"*
-
-**Para Ciudadanos:**
+Para Ciudadanos:
 - 📱 Reportar incidencias desde cualquier dispositivo
 - 👁️ Seguimiento transparente del estado de reportes
 - 🤝 Participación activa en la mejora urbana
 
-**Para Administraciones:**
+Para Administraciones:
 - 📊 Centralización y priorización eficiente
 - 📈 Métricas de gestión urbana
 - 💬 Comunicación directa con ciudadanos
@@ -132,36 +209,31 @@ Nuestro enfoque UX se basa en:
 ## 🗓️ Roadmap de Componentes
 
 ### ✅ Completado
-
-- [x] 🏗️ Estructura base del proyecto React
-- [x] 🎨 Sistema de estilos CSS moderno
-- [x] 📦 Configuración de dependencias
-- [x] 🧩 Componentes básicos (App, Header)
-- [x] 📋 Documentación técnica
+- 🏗️ Estructura base del proyecto React
+- 🎨 Sistema de estilos CSS moderno
+- 📦 Configuración de dependencias
+- 🧩 Componentes básicos (App, Header)
+- 📋 Documentación técnica
 
 ### 🚧 En Desarrollo
-
-- [ ] 🎯 Dashboard principal con métricas
-- [ ] 📄 Componentes de gestión de reportes
-- [ ] 🔐 Sistema de autenticación JWT
-- [ ] 📱 Optimización para móviles
-- [ ] 🧪 Suite de testing (Jest + Testing Library)
+- 🎯 Dashboard principal con métricas
+- 📄 Componentes de gestión de reportes
+- 🔐 Sistema de autenticación JWT
+- 📱 Optimización para móviles
+- 🧪 Suite de testing (Jest + Testing Library)
 
 ### 📋 Próximas Versiones
-
-- [ ] 🗺️ Integración con mapas (Google Maps/OpenStreet)
-- [ ] 🔔 Sistema de notificaciones push
-- [ ] 📊 Dashboard de analytics avanzado
-- [ ] 🎨 Tema oscuro/claro
-- [ ] 🌐 Internacionalización (i18n)
-- [ ] 📱 Aplicación móvil nativa (React Native)
+- 🗺️ Integración con mapas (Google Maps/OpenStreet)
+- 🔔 Sistema de notificaciones push
+- 📊 Dashboard de analytics avanzado
+- 🎨 Tema oscuro/claro
+- 🌐 Internacionalización (i18n)
+- 📱 Aplicación móvil nativa (React Native)
 
 ## 🤝 Guía de Contribución
-
 ¡Tu contribución es bienvenida! Sigue estos pasos:
 
 ### 🛠️ Desarrollo Local
-
 ```bash
 # 1️⃣ Fork del repositorio
 git clone https://github.com/TU-USUARIO/AsisT.git
@@ -177,49 +249,37 @@ git push origin feature/nueva-funcionalidad
 ```
 
 ### 📏 Estándares de Código
-
-- ✅ **ESLint** configurado para consistency
-- 🎨 **Prettier** para formateo automático
-- 📝 **Conventional Commits** para mensajes claros
-- 🧪 **Tests** requeridos para nuevas features
+- ✅ ESLint configurado para consistency
+- 🎨 Prettier para formateo automático
+- 📝 Conventional Commits para mensajes claros
+- 🧪 Tests requeridos para nuevas features
 
 ### 🎯 Áreas de Contribución
-
-- 🐛 **Bug fixes** - Siempre bienvenidos
-- ✨ **Nuevas features** - Consultar roadmap
-- 🎨 **Mejoras UX/UI** - Diseño y usabilidad
-- 📚 **Documentación** - Guías y tutoriales
-- 🧪 **Testing** - Cobertura y calidad
+- 🐛 Bug fixes - Siempre bienvenidos
+- ✨ Nuevas features - Consultar roadmap
+- 🎨 Mejoras UX/UI - Diseño y usabilidad
+- 📚 Documentación - Guías y tutoriales
+- 🧪 Testing - Cobertura y calidad
 
 ## 📞 Contacto y Soporte
 
-<div align="center">
-
 ### 👨‍💻 Desarrolladora Principal
+Sabela Cobelo
 
-**Sabela Cobelo**  
-🎓 *Ingeniera Informática*  
-🏫 *[Universidad/Centro de Estudios]*
+🎓 Ingeniera Informática
 
-[![GitHub](https://img.shields.io/badge/GitHub-@SabelaCobelo-181717?style=for-the-badge&logo=github)](https://github.com/SabelaCobelo)
-[![Email](https://img.shields.io/badge/Email-Contacto-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:tu-email@ejemplo.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Perfil-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/tu-perfil)
+🏫 [Universidad/Centro de Estudios]
 
-### 🌟 ¡Gracias por tu interés en AsisT Frontend!
-
-*Construyendo el futuro de la participación ciudadana digital* 🏙️✨
-
-[![Stars](https://img.shields.io/github/stars/SabelaCobelo/AsisT?style=for-the-badge)](https://github.com/SabelaCobelo/AsisT/stargazers)
-[![Forks](https://img.shields.io/github/forks/SabelaCobelo/AsisT?style=for-the-badge)](https://github.com/SabelaCobelo/AsisT/network/members)
-[![Issues](https://img.shields.io/github/issues/SabelaCobelo/AsisT?style=for-the-badge)](https://github.com/SabelaCobelo/AsisT/issues)
-
-</div>
+[![GitHub](https://img.shields.io/badge/GitHub-SabelaCobelo-181717?logo=github)](https://github.com/SabelaCobelo)
+[![Email](https://img.shields.io/badge/Email-Contacto-informational?logo=gmail)](mailto:tu-email@ejemplo.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Perfil-0A66C2?logo=linkedin&logoColor=white)](https://linkedin.com/in/tu-perfil)
 
 ---
 
-<div align="center">
+> Juntos, transformamos reportes en resultados y ciudades en comunidades mejores. ✨🏙️
 
-**© 2024 AsisT Project | MIT License**  
-*Parte del Trabajo Final de Carrera - Ingeniería Informática*
+[![Stars](https://img.shields.io/github/stars/SabelaCobelo/AsisT?style=social)](https://github.com/SabelaCobelo/AsisT/stargazers)
+[![Forks](https://img.shields.io/github/forks/SabelaCobelo/AsisT?style=social)](https://github.com/SabelaCobelo/AsisT/network/members)
+[![Issues](https://img.shields.io/github/issues/SabelaCobelo/AsisT?style=social)](https://github.com/SabelaCobelo/AsisT/issues)
 
-</div>
+© 2024 AsisT Project | MIT License — Parte del Trabajo Final de Carrera - Ingeniería Informática
