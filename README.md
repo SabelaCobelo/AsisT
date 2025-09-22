@@ -1,133 +1,329 @@
 # AsisT - Sistema de Gestión de Reportes Sociales
 
-Sistema de gestión de reportes sociales desarrollado con React en el frontend y Spring Boot en el backend.
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![React](https://img.shields.io/badge/React-18.2-blue.svg)](https://reactjs.org/)
+[![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://openjdk.java.net/projects/jdk/17/)
+[![JWT](https://img.shields.io/badge/JWT-Authentication-success.svg)](https://jwt.io/)
+[![TFC](https://img.shields.io/badge/TFC-Memoria%20Académica-purple.svg)](#memoria-tfc)
 
-## Estructura del Proyecto
+Sistema de gestión de reportes sociales desarrollado con React en el frontend y Spring Boot en el backend. Proyecto desarrollado como Trabajo de Fin de Carrera (TFC) enfocado en la gestión profesional de reportes sociales con autenticación JWT avanzada.
+
+## 📋 Estado del Proyecto - Checklist Visual
+
+### 🔧 Backend (Spring Boot)
+- ✅ **Arquitectura base implementada**
+  - ✅ Configuración Spring Boot con Java 17
+  - ✅ Estructura MVC (Controller, Service, Repository, Model)
+  - ✅ Base de datos JPA configurada
+  
+- ✅ **Sistema de Autenticación JWT**
+  - ✅ JwtService (generación, validación, refresh tokens)
+  - ✅ SecurityConfig (filtros, CORS, stateless)
+  - ✅ AuthController (registro, login, refresh-token)
+  - ✅ Encriptación BCrypt con factor 12
+  - ✅ Validación de entrada con Bean Validation
+
+- ✅ **Controladores REST**
+  - ✅ AuthController (registro/login/refresh)
+  - ✅ UserController (gestión de usuarios)
+  - ✅ ReportController (gestión de reportes)
+
+- 🚧 **Funcionalidades de Negocio**
+  - ✅ CRUD básico de reportes
+  - ✅ Gestión de usuarios
+  - 🚧 Lógica avanzada de reportes sociales
+  - ⏳ Sistema de notificaciones
+  - ⏳ Reportes y estadísticas
+
+- ✅ **Documentación y Testing**
+  - ✅ Swagger/OpenAPI configurado
+  - ✅ Documentación de endpoints JWT
+  - 🚧 Tests unitarios
+  - ⏳ Tests de integración
+
+### 🎨 Frontend (React)
+- ✅ **Configuración base**
+  - ✅ Aplicación React 18.2 creada
+  - ✅ Estructura de componentes
+  - ✅ Routing configurado
+
+- 🚧 **Integración con Backend**
+  - ✅ Servicios HTTP (axios/fetch)
+  - 🚧 Gestión de tokens JWT
+  - 🚧 Interceptores para Authorization header
+  - ⏳ Manejo de refresh tokens automático
+
+- 🚧 **Interfaz de Usuario**
+  - 🚧 Formularios de login/registro
+  - 🚧 Dashboard principal
+  - ⏳ Gestión de reportes (CRUD)
+  - ⏳ Perfil de usuario
+  - ⏳ Componentes reutilizables
+
+- ⏳ **UX/UI Avanzado**
+  - ⏳ Diseño responsivo
+  - ⏳ Validación de formularios en tiempo real
+  - ⏳ Estados de carga y error
+  - ⏳ Notificaciones toast
+
+### 🏗️ Infraestructura y Despliegue
+- ✅ **Desarrollo Local**
+  - ✅ Configuración de desarrollo
+  - ✅ Variables de entorno documentadas
+  - ✅ Scripts de inicio
+
+- ⏳ **Base de Datos**
+  - ✅ H2 para desarrollo
+  - ⏳ PostgreSQL para producción
+  - ⏳ Migraciones de esquema
+  - ⏳ Backup y recovery
+
+- ⏳ **Despliegue**
+  - ⏳ Dockerización (backend + frontend)
+  - ⏳ CI/CD pipeline
+  - ⏳ Configuración de producción
+  - ⏳ Monitoreo y logs
+
+## 🚀 Guía de Inicio Rápido
+
+### Requisitos Previos
+```bash
+# Instalar dependencias del sistema
+- Java 17+ (OpenJDK recomendado)
+- Node.js 18+ y npm
+- Maven 3.8+
+- Git
+```
+
+### Backend (Spring Boot)
+```bash
+# 1. Clonar repositorio
+git clone https://github.com/SabelaCobelo/AsisT.git
+cd AsisT/backend
+
+# 2. Configurar variables de entorno
+export JWT_SECRET_BASE64="tu_clave_base64_de_al_menos_256_bits"
+
+# 3. Instalar dependencias y ejecutar
+mvn clean install
+mvn spring-boot:run
+
+# ✅ Backend disponible en: http://localhost:8080
+# ✅ Swagger UI: http://localhost:8080/swagger-ui.html
+```
+
+### Frontend (React)
+```bash
+# 1. Navegar al directorio frontend
+cd AsisT/frontend
+
+# 2. Instalar dependencias
+npm install
+
+# 3. Configurar variables de entorno
+echo "REACT_APP_API_URL=http://localhost:8080/api" > .env.local
+
+# 4. Ejecutar aplicación
+npm start
+
+# ✅ Frontend disponible en: http://localhost:3000
+```
+
+## 🧪 Testing y Validación
+
+### Testing con Postman
+Importa la colección de pruebas incluida o usa estos endpoints:
+
+**1. Registro de Usuario**
+```http
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "SecurePass123!"
+}
+```
+
+**2. Login**
+```http
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "SecurePass123!"
+}
+```
+
+**3. Acceso a Endpoint Protegido**
+```http
+GET http://localhost:8080/api/users
+Authorization: Bearer {tu_access_token}
+```
+
+### Scripts de Prueba Automatizada
+```bash
+# Backend - Tests unitarios
+cd backend
+mvn test
+
+# Frontend - Tests de componentes
+cd frontend
+npm test
+
+# Tests de integración (cuando estén implementados)
+npm run test:integration
+```
+
+## 📚 Estructura del Proyecto
+
 ```
 AsisT/
-├── backend/          # Aplicación Spring Boot
-│   └── src/
-│       └── main/
-│           └── java/
-│               └── com/
-│                   └── asist/
-│                       ├── AsistApplication.java    # Clase principal de Spring Boot
-│                       ├── controller/              # Controladores REST
-│                       │   ├── ReportController.java # Controlador de Reports
-│                       │   ├── UserController.java   # Controlador de Users
-│                       │   └── AuthController.java   # Autenticación (registro/login + JWT)
-│                       ├── model/                   # Entidades JPA
-│                       │   └── Report.java          # Entidad Report
-│                       ├── repository/              # Repositorios JPA
-│                       │   ├── ReportRepository.java # Repositorio de Report
-│                       │   └── UserRepository.java   # Repositorio de User
-│                       ├── service/                 # Servicios de negocio
-│                       │   ├── UserService.java     # Servicio de usuarios
-│                       │   └── JwtService.java      # Servicio para generación/validación de JWT
-│                       └── config/                  # Configuraciones
-│                           └── SecurityConfig.java  # Configuración de seguridad avanzada (JWT + CORS)
-└── frontend/         # Aplicación React
-    ├── public/
-    └── src/
+├── backend/                    # 🔧 Spring Boot Application
+│   ├── src/main/java/com/asist/
+│   │   ├── AsistApplication.java       # 🚀 Main Spring Boot class
+│   │   ├── controller/                 # 🎯 REST Controllers
+│   │   │   ├── AuthController.java     # 🔐 Authentication endpoints
+│   │   │   ├── UserController.java     # 👤 User management
+│   │   │   └── ReportController.java   # 📊 Report management
+│   │   ├── model/                      # 📋 JPA Entities
+│   │   │   ├── User.java              # 👤 User entity
+│   │   │   └── Report.java            # 📊 Report entity
+│   │   ├── repository/                 # 💾 Data Access Layer
+│   │   │   ├── UserRepository.java    # 👤 User repository
+│   │   │   └── ReportRepository.java  # 📊 Report repository
+│   │   ├── service/                    # 🛠️ Business Logic
+│   │   │   ├── UserService.java       # 👤 User business logic
+│   │   │   └── JwtService.java        # 🔐 JWT management
+│   │   └── config/                     # ⚙️ Configuration
+│   │       └── SecurityConfig.java    # 🔒 Security configuration
+│   ├── src/main/resources/
+│   │   └── application.yml            # ⚙️ App configuration
+│   └── pom.xml                        # 📦 Maven dependencies
+│
+├── frontend/                   # 🎨 React Application
+│   ├── public/                # 🌐 Static files
+│   ├── src/                   # 💻 Source code
+│   │   ├── components/        # 🧩 React components
+│   │   ├── services/          # 🔗 API integration
+│   │   ├── hooks/             # 🎣 Custom hooks
+│   │   ├── context/           # 🌍 State management
+│   │   └── utils/             # 🛠️ Utilities
+│   ├── package.json          # 📦 npm dependencies
+│   └── README.md             # 📖 Frontend documentation
+│
+├── docs/                      # 📚 Documentation
+│   ├── api/                   # 📖 API documentation
+│   ├── deployment/            # 🚀 Deployment guides
+│   └── testing/               # 🧪 Testing guides
+│
+└── README.md                  # 📖 This file
 ```
 
-## Backend - Spring Boot
+## 🔐 Seguridad y Autenticación
 
-### Seguridad y Autenticación (JWT)
-El backend implementa autenticación basada en JWT con configuración de seguridad avanzada.
+### Flujo JWT Implementado
+1. **Registro**: Validación + hash BCrypt + generación de tokens
+2. **Login**: Autenticación + emisión de access/refresh tokens  
+3. **Acceso**: Validación JWT en cada request protegido
+4. **Refresh**: Renovación automática de access tokens
 
-Componentes clave:
-- JwtService: generación, validación, expiración y refresh tokens
-- SecurityConfig: HTTP stateless, filtro JwtAuthenticationFilter, CORS, CSRF disabled
-- AuthController: registro, login y refresh-token. Devuelve accessToken, refreshToken y detalles de usuario
+### Buenas Prácticas Aplicadas
+- ✅ Tokens con expiración corta (access: 15min, refresh: 7 días)
+- ✅ Claves de al menos 256 bits para firmas JWT
+- ✅ BCrypt con factor de coste 12
+- ✅ CORS configurado por entorno
+- ✅ Sesiones stateless
+- ✅ Validación de entrada robusta
 
-Endpoints públicos:
-- POST /api/auth/register
-- POST /api/auth/login
-- POST /api/auth/refresh-token
-- Swagger: /v3/api-docs/**, /swagger-ui/**, /swagger-ui.html
-
-Resto de endpoints: protegidos con JWT (Authorization: Bearer <token>)
-
-### Flujo de Autenticación
-1) Registro
-- Request: POST /api/auth/register { username, email, password }
-- Acciones: valida datos, hashea contraseña (BCrypt 12), persiste usuario
-- Respuesta: 201 Created con { accessToken, refreshToken, user: { id, email, username } }
-
-2) Login
-- Request: POST /api/auth/login { email, password }
-- Acciones: autentica con AuthenticationManager, genera tokens vía JwtService
-- Respuesta: 200 OK con { accessToken, refreshToken, user }
-
-3) Refresh Token
-- Request: POST /api/auth/refresh-token { refreshToken }
-- Acciones: valida refresh, emite nuevo accessToken
-- Respuesta: 200 OK { accessToken }
-
-4) Acceso a endpoints protegidos
-- Header: Authorization: Bearer <accessToken>
-- El filtro JwtAuthenticationFilter valida firma, expiración y setea el contexto de seguridad
-
-### Buenas prácticas de seguridad
-- No almacenar secretos en el código: usar variables de entorno o vault (jwt.secret)
-- Usar llaves de al menos 256 bits para HS256 (base64)
-- Rotación de claves y expiraciones cortas (access ~15m, refresh ~7d) según necesidades
-- HTTP Strict Transport Security (HSTS) y solo HTTPS en producción
-- CORS restringido por entorno (dominios permitidos específicos)
-- Validación de entrada con Bean Validation y sanitización de datos
-- BCrypt con factor de coste >= 12
-- Sesiones stateless y CSRF deshabilitado para APIs REST
-- Limitar exposición de datos de usuario en respuestas
-- Logs seguros: no registrar tokens completos ni contraseñas
-
-### Pruebas con Postman
-Colección de pruebas sugerida:
-- Auth - Register
-  - POST http://localhost:8080/api/auth/register
-  - Body (JSON): { "username":"alice", "email":"alice@example.com", "password":"Secreta123!" }
-- Auth - Login
-  - POST http://localhost:8080/api/auth/login
-  - Body (JSON): { "email":"alice@example.com", "password":"Secreta123!" }
-  - Tests: guardar accessToken y refreshToken en variables de entorno de Postman
-- Auth - Refresh Token
-  - POST http://localhost:8080/api/auth/refresh-token
-  - Body (JSON): { "refreshToken":"{{refreshToken}}" }
-- Users - Protected (ejemplo)
-  - GET http://localhost:8080/api/users
-  - Header: Authorization: Bearer {{accessToken}}
-
-Sugerencias de scripts Postman:
-- Tests de login: pm.environment.set("accessToken", pm.response.json().accessToken)
-- Tests de login: pm.environment.set("refreshToken", pm.response.json().refreshToken)
-
-### Cómo proteger endpoints con JWT
-- En SecurityConfig, los endpoints no listados como permitAll requieren autenticación
-- Añade @PreAuthorize("hasRole('ADMIN')") en métodos que requieran rol
-- En controladores, no es necesario extraer manualmente el usuario; usar SecurityContextHolder
-
-### Configuración (application.yml ejemplo)
-```
+### Configuración de Seguridad
+```yaml
 jwt:
-  secret: ${JWT_SECRET_BASE64}
-  expiration: 900000        # 15 minutos
-  refresh-expiration: 604800000  # 7 días
+  secret: ${JWT_SECRET_BASE64}          # Variable de entorno requerida
+  expiration: 900000                    # 15 minutos
+  refresh-expiration: 604800000         # 7 días
+
 spring:
   security:
     filter:
       dispatcher-types: REQUEST
 ```
 
-### Dependencias (pom.xml)
-- Spring Security
-- jjwt-api, jjwt-impl (runtime), jjwt-jackson (runtime)
-- spring-boot-starter-validation
-- spring-boot-starter-web, spring-boot-starter-data-jpa
+## 📖 Memoria TFC
 
-## Frontend - React
-- Consumir endpoints de autenticación
-- Guardar tokens en memoria/secure httpOnly cookie (preferible httpOnly cookies para refresh)
-- Enviar Authorization: Bearer accessToken en peticiones protegidas
+Este proyecto forma parte de un Trabajo de Fin de Carrera enfocado en:
 
-## Licencia
-[Especificar licencia]
+- 🎯 **Objetivo**: Desarrollo de sistema de gestión de reportes sociales
+- 🏗️ **Arquitectura**: Aplicación full-stack con separación clara frontend/backend
+- 🔐 **Seguridad**: Implementación de autenticación JWT profesional
+- 📊 **Funcionalidad**: Gestión completa de reportes y usuarios
+- 🚀 **Despliegue**: Preparación para entornos de producción
+
+### Enlaces Académicos
+- 📚 [Memoria Completa del TFC](docs/memoria-tfc.pdf) *(pendiente de subir)*
+- 📋 [Documentación Técnica](docs/technical-documentation.md)
+- 🎥 [Video Demostración](docs/demo-video.md) *(pendiente)*
+
+## 🛣️ Roadmap de Desarrollo
+
+### Fase Actual (🚧 En desarrollo)
+- Completar integración frontend-backend
+- Implementar gestión avanzada de reportes
+- Mejorar interfaz de usuario
+
+### Próximas Fases
+1. **🎨 UX/UI Mejorado** (Sprint 2)
+   - Diseño responsivo completo
+   - Componentes de UI avanzados
+   - Validaciones en tiempo real
+
+2. **📊 Analytics y Reportes** (Sprint 3)
+   - Dashboard con métricas
+   - Exportación de datos
+   - Filtros avanzados
+
+3. **🚀 Producción** (Sprint 4)
+   - Dockerización completa
+   - CI/CD automatizado
+   - Monitoreo y alertas
+
+## 🤝 Contribución y Desarrollo
+
+### Para Desarrolladores
+```bash
+# Setup completo del entorno de desarrollo
+git clone https://github.com/SabelaCobelo/AsisT.git
+cd AsisT
+
+# Backend
+cd backend
+mvn clean install
+mvn spring-boot:run
+
+# Frontend (nueva terminal)
+cd frontend
+npm install && npm start
+```
+
+### Estándares de Código
+- 🎯 **Backend**: Java Code Conventions, Spring Boot best practices
+- 🎨 **Frontend**: ESLint + Prettier, React best practices
+- 📝 **Commits**: Conventional Commits specification
+- 🧪 **Testing**: JUnit 5 (backend), Jest + Testing Library (frontend)
+
+## 📞 Soporte y Contacto
+
+- 👤 **Desarrollador**: Sabela Cobelo
+- 📧 **Email**: [sabelacobelo@example.com](mailto:sabelacobelo@example.com)
+- 🔗 **Perfil GitHub**: [@SabelaCobelo](https://github.com/SabelaCobelo)
+- 🎓 **Institución**: [Universidad/Institución TFC]
+
+## 📄 Licencia
+
+Este proyecto está desarrollado como parte de un Trabajo de Fin de Carrera. Los derechos de uso están sujetos a las políticas académicas correspondientes.
+
+---
+
+**Estado del Proyecto**: 🚧 En desarrollo activo | **Versión**: 1.0.0-SNAPSHOT | **Última actualización**: Septiembre 2025
