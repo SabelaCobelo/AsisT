@@ -13,10 +13,14 @@ AsisT/
 │               └── com/
 │                   └── asist/
 │                       ├── AsistApplication.java    # Clase principal de Spring Boot
+│                       ├── controller/              # Controladores REST
+│                       │   ├── ReportController.java # Controlador de Reports
+│                       │   └── UserController.java   # Controlador de Users
 │                       ├── model/                   # Entidades JPA
 │                       │   └── Report.java         # Entidad Report
 │                       └── repository/              # Repositorios JPA
-│                           └── ReportRepository.java # Repositorio de Report
+│                           ├── ReportRepository.java # Repositorio de Report
+│                           └── UserRepository.java   # Repositorio de User
 └── frontend/         # Aplicación React
     ├── public/
     └── src/
@@ -67,6 +71,105 @@ Interfaz de repositorio para la entidad Report que extiende `JpaRepository<Repor
 - Anotada con `@Repository`
 - Métodos de consulta automáticos basados en convenciones de Spring Data JPA
 - Soporte para consultas complejas con múltiples criterios
+
+### Controladores REST
+
+#### UserController
+
+Controlador REST para la gestión de usuarios del sistema.
+
+**Ubicación:** `backend/src/main/java/com/asist/controller/UserController.java`
+
+**Base URL:** `/api/users`
+
+**Endpoints disponibles:**
+
+##### GET /api/users
+- **Descripción:** Obtener todos los usuarios registrados
+- **Método HTTP:** GET
+- **Respuesta exitosa:** 200 OK con lista de usuarios
+- **Respuesta vacía:** 204 No Content si no hay usuarios
+- **Respuesta de error:** 500 Internal Server Error
+
+##### GET /api/users/{id}
+- **Descripción:** Obtener un usuario específico por su ID
+- **Método HTTP:** GET
+- **Parámetros:** 
+  - `id` (Long) - ID del usuario a buscar
+- **Respuesta exitosa:** 200 OK con datos del usuario
+- **Respuesta no encontrado:** 404 Not Found
+- **Respuesta de error:** 500 Internal Server Error
+
+##### POST /api/users
+- **Descripción:** Registrar un nuevo usuario en el sistema
+- **Método HTTP:** POST
+- **Body:** Objeto User en formato JSON
+- **Respuesta exitosa:** 201 Created con el usuario creado
+- **Respuesta de error:** 500 Internal Server Error
+
+##### PUT /api/users/{id}
+- **Descripción:** Actualizar un usuario existente
+- **Método HTTP:** PUT
+- **Parámetros:** 
+  - `id` (Long) - ID del usuario a actualizar
+- **Body:** Objeto User con los nuevos datos en formato JSON
+- **Respuesta exitosa:** 200 OK con el usuario actualizado
+- **Respuesta no encontrado:** 404 Not Found
+- **Respuesta de error:** 500 Internal Server Error
+
+##### DELETE /api/users/{id}
+- **Descripción:** Eliminar un usuario del sistema
+- **Método HTTP:** DELETE
+- **Parámetros:** 
+  - `id` (Long) - ID del usuario a eliminar
+- **Respuesta exitosa:** 204 No Content
+- **Respuesta no encontrado:** 404 Not Found
+- **Respuesta de error:** 500 Internal Server Error
+
+**Características:**
+- Anotado con `@RestController` para crear endpoints REST
+- Usa `@RequestMapping("/api/users")` para la ruta base
+- Incluye `@CrossOrigin(origins = "*", maxAge = 3600)` para soporte CORS
+- Utiliza `UserRepository` para operaciones de persistencia
+- Implementa manejo de errores y respuestas HTTP apropiadas
+- Retorna `ResponseEntity` para control completo de la respuesta HTTP
+- Documentación completa en JavaDoc
+
+#### ReportController
+
+Controlador REST para la gestión de reportes sociales.
+
+**Ubicación:** `backend/src/main/java/com/asist/controller/ReportController.java`
+
+**Base URL:** `/api/reports`
+
+**Características:**
+- Controlador REST para operaciones CRUD sobre reportes
+- Implementa endpoints para crear, leer, actualizar y eliminar reportes
+- Soporte para filtros y búsquedas avanzadas
+- Manejo de errores y validaciones
+
+## API REST - Resumen de Endpoints
+
+### Usuarios
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET | `/api/users` | Obtener todos los usuarios |
+| GET | `/api/users/{id}` | Obtener usuario por ID |
+| POST | `/api/users` | Registrar nuevo usuario |
+| PUT | `/api/users/{id}` | Actualizar usuario |
+| DELETE | `/api/users/{id}` | Eliminar usuario |
+
+### Reportes
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET | `/api/reports` | Obtener todos los reportes |
+| GET | `/api/reports/{id}` | Obtener reporte por ID |
+| POST | `/api/reports` | Crear nuevo reporte |
+| PUT | `/api/reports/{id}` | Actualizar reporte |
+| DELETE | `/api/reports/{id}` | Eliminar reporte |
 
 ## Frontend - React
 
