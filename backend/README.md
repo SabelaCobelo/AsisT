@@ -62,16 +62,86 @@ mvn spring-boot:run
 # La API estará disponible en http://localhost:8080
 ```
 
+## Entidades del Modelo
+
+### 👤 User - Entidad de Usuario
+
+La entidad **User** representa a los usuarios del sistema AsisT.
+
+**Ubicación:** `src/main/java/com/asist/model/User.java`
+
+#### Campos:
+- **id** (Long): Identificador único del usuario (clave primaria, autoincremental)
+- **username** (String): Nombre de usuario único y no nulo
+- **password** (String): Contraseña del usuario (no nulo)
+- **email** (String): Correo electrónico único y no nulo
+- **roles** (Set<String>): Conjunto de roles asignados al usuario
+
+#### Características:
+- **@Entity**: Marca la clase como entidad JPA
+- **@Table(name = "users")**: Especifica el nombre de la tabla en la base de datos
+- **@Id** y **@GeneratedValue**: Clave primaria autoincremental
+- **@Column**: Validaciones de unicidad y nulabilidad
+- **@ElementCollection**: Manejo de la colección de roles
+- Constructores por defecto y con parámetros
+- Getters y setters completos
+- Método toString() para debugging
+
+### 📊 Report - Entidad de Reporte
+
+La entidad **Report** representa los reportes de incidencias en el sistema.
+
+**Ubicación:** `src/main/java/com/asist/model/Report.java`
+
+## Repositorios
+
+### 👤 UserRepository - Repositorio de Usuarios
+
+Interface que extiende **JpaRepository** para operaciones CRUD sobre usuarios.
+
+**Ubicación:** `src/main/java/com/asist/repository/UserRepository.java`
+
+#### Métodos disponibles:
+
+##### Métodos básicos heredados de JpaRepository:
+- `save(User user)` - Guardar/actualizar usuario
+- `findById(Long id)` - Buscar usuario por ID
+- `findAll()` - Obtener todos los usuarios
+- `deleteById(Long id)` - Eliminar usuario por ID
+- `count()` - Contar usuarios
+- Y más métodos estándar...
+
+##### Métodos personalizados:
+- **findByUsername(String username)**: Busca un usuario por nombre de usuario
+  - Retorna: `Optional<User>`
+- **findByEmail(String email)**: Busca un usuario por email
+  - Retorna: `Optional<User>`
+- **existsByUsername(String username)**: Verifica si existe un usuario con el username dado
+  - Retorna: `boolean`
+- **existsByEmail(String email)**: Verifica si existe un usuario con el email dado
+  - Retorna: `boolean`
+
+#### Características técnicas:
+- **@Repository**: Anotación que marca la interface como repositorio Spring
+- **Extends JpaRepository<User, Long>**: Hereda funcionalidades CRUD básicas
+- **Query Methods**: Spring Data JPA genera automáticamente las consultas basándose en los nombres de los métodos
+- **Documentación completa**: JavaDoc en todos los métodos personalizados
+
+### 📊 ReportRepository - Repositorio de Reportes
+
+Interface para operaciones CRUD sobre reportes.
+
+**Ubicación:** `src/main/java/com/asist/repository/ReportRepository.java`
+
 ## API Endpoints
 
 ### 📋 ReportController - Gestión de Reportes
 
-El controlador `ReportController` proporciona endpoints REST para realizar operaciones CRUD sobre los reportes del sistema.
+El controlador ReportController proporciona endpoints REST para realizar operaciones CRUD sobre los reportes del sistema.
 
 **Base URL:** `/api/reports`
 
 #### 📖 Obtener Todos los Reportes
-
 ```http
 GET /api/reports
 ```
@@ -98,7 +168,6 @@ GET /api/reports
 ```
 
 #### 🔍 Obtener Reporte por ID
-
 ```http
 GET /api/reports/{id}
 ```
@@ -126,7 +195,6 @@ GET /api/reports/{id}
 ```
 
 #### ➕ Crear Nuevo Reporte
-
 ```http
 POST /api/reports
 ```
@@ -155,7 +223,6 @@ POST /api/reports
 - `500 INTERNAL_SERVER_ERROR` - Error interno del servidor
 
 #### ✏️ Actualizar Reporte
-
 ```http
 PUT /api/reports/{id}
 ```
@@ -186,7 +253,6 @@ PUT /api/reports/{id}
 - `500 INTERNAL_SERVER_ERROR` - Error interno del servidor
 
 #### 🗑️ Eliminar Reporte
-
 ```http
 DELETE /api/reports/{id}
 ```
@@ -202,12 +268,11 @@ DELETE /api/reports/{id}
 - `500 INTERNAL_SERVER_ERROR` - Error interno del servidor
 
 #### 🚨 Eliminar Todos los Reportes
-
 ```http
 DELETE /api/reports
 ```
 
-**Descripción:** Elimina todos los reportes del sistema. **¡Usar con precaución!**
+**Descripción:** Elimina todos los reportes del sistema. ¡Usar con precaución!
 
 **Respuestas:**
 - `204 NO_CONTENT` - Todos los reportes eliminados exitosamente
@@ -216,7 +281,6 @@ DELETE /api/reports
 ### 📝 Ejemplos de Uso
 
 #### Crear un reporte con curl:
-
 ```bash
 curl -X POST http://localhost:8080/api/reports \
   -H "Content-Type: application/json" \
@@ -230,13 +294,11 @@ curl -X POST http://localhost:8080/api/reports \
 ```
 
 #### Obtener todos los reportes:
-
 ```bash
 curl -X GET http://localhost:8080/api/reports
 ```
 
 #### Actualizar un reporte:
-
 ```bash
 curl -X PUT http://localhost:8080/api/reports/1 \
   -H "Content-Type: application/json" \
@@ -275,16 +337,23 @@ Para probar los endpoints, puedes usar:
 - Modelo Report creado
 - ReportRepository implementado
 - ReportController con endpoints CRUD básicos
+- **Modelo User creado con campos completos (id, username, password, email, roles)**
+- **UserRepository implementado con métodos de búsqueda personalizados**
 - Documentación completa de la API
+- **Documentación completa del modelo User y UserRepository**
 
 🚧 **En desarrollo:**
 - Autenticación y autorización
 - Validaciones avanzadas
 - Paginación y filtrado
 - Testing unitario e integración
+- **UserController para gestión de usuarios**
 
 📋 **Pendiente:**
 - Implementación de servicios (Service layer)
 - Manejo de excepciones personalizado
 - Logging y monitoreo
 - Despliegue en producción
+- **Endpoints CRUD para gestión de usuarios**
+- **Implementación de autenticación con JWT**
+- **Hash de contraseñas con BCrypt**
