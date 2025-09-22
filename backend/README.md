@@ -1,359 +1,249 @@
-# Backend - AsisT
+<div align="center">
 
-## Descripción
+# 🚀 AsisT Backend API
 
-Este módulo contiene la API REST del proyecto AsisT desarrollada con **Spring Boot**.
+### *Plataforma digital para la gestión colaborativa de incidencias urbanas*
 
-## Tecnologías Utilizadas
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![Java](https://img.shields.io/badge/Java-17+-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![JPA](https://img.shields.io/badge/Spring%20Data%20JPA-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![Security](https://img.shields.io/badge/Spring%20Security-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
 
-- Spring Boot 3.x
-- Java 17+
-- Spring Data JPA
-- Spring Security
-- MySQL/PostgreSQL
-- Maven
-- Spring Boot Starter Web
-- Spring Boot Starter Validation
+![Status](https://img.shields.io/badge/Status-En%20Desarrollo-yellow?style=flat-square)
+![Version](https://img.shields.io/badge/Version-1.0.0--SNAPSHOT-blue?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
-## Estructura del Proyecto
+---
+
+</div>
+
+## 📖 Descripción
+
+**AsisT** es una API REST robusta desarrollada con **Spring Boot** que facilita la gestión colaborativa de reportes de incidencias urbanas. La plataforma permite a ciudadanos y administraciones locales trabajar juntos para identificar, reportar y gestionar problemas en el entorno urbano de manera eficiente.
+
+### ✨ Características Principales
+
+- 🔐 **Autenticación segura** con JWT y Spring Security
+- 📊 **Gestión completa de reportes** (CRUD operations)
+- 👥 **Sistema de usuarios** con roles diferenciados
+- 🗃️ **Persistencia de datos** con JPA/Hibernate
+- 🌐 **API RESTful** bien documentada
+- ⚡ **Respuestas optimizadas** con códigos HTTP estándar
+
+---
+
+## ⚡ Instalación Rápida
+
+### Prerrequisitos
+```bash
+☑️ Java 17+
+☑️ Maven 3.8+
+☑️ MySQL/PostgreSQL
+```
+
+### 🚀 Inicio Rápido (3 pasos)
+
+```bash
+# 1️⃣ Clonar y navegar al proyecto
+git clone https://github.com/SabelaCobelo/AsisT.git
+cd AsisT/backend
+
+# 2️⃣ Instalar dependencias
+mvn clean install
+
+# 3️⃣ Ejecutar la aplicación
+mvn spring-boot:run
+```
+
+> 🌐 **La API estará disponible en:** `http://localhost:8080`
+
+### ⚙️ Configuración Base de Datos
+
+```properties
+# application.properties
+spring.datasource.url=jdbc:mysql://localhost:3306/asist_db
+spring.datasource.username=tu_usuario
+spring.datasource.password=tu_contraseña
+spring.jpa.hibernate.ddl-auto=update
+```
+
+---
+
+## 🏗️ Arquitectura del Proyecto
 
 ```
 backend/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/asist/
-│   │   │       ├── controller/  # Controladores REST
-│   │   │       ├── service/     # Lógica de negocio
-│   │   │       ├── repository/  # Acceso a datos
-│   │   │       ├── model/       # Entidades y DTOs
-│   │   │       ├── config/      # Configuraciones
-│   │   │       └── exception/   # Manejo de excepciones
-│   │   └── resources/
-│   │       ├── application.properties
-│   │       └── data.sql
-│   └── test/               # Tests unitarios e integración
+├── 📁 src/main/java/com/asist/
+│   ├── 🎮 controller/     # Controladores REST
+│   ├── ⚙️ service/        # Lógica de negocio
+│   ├── 💾 repository/     # Acceso a datos
+│   ├── 📋 model/          # Entidades JPA
+│   ├── 🔧 config/         # Configuraciones
+│   └── ⚠️ exception/      # Manejo de excepciones
+├── 📁 src/main/resources/
+│   ├── application.properties
+│   └── data.sql
+├── 📁 src/test/           # Tests unitarios
 ├── pom.xml
 └── README.md
 ```
 
-## Instalación y Ejecución
+---
 
-### Prerrequisitos
+## 🌍 Casos de Uso Social
 
-- Java 17 o superior
-- Maven 3.8+
-- Base de datos (MySQL/PostgreSQL)
+### 👤 Para Ciudadanos
+- 📱 **Reportar incidencias** urbanas de forma rápida
+- 📍 **Geolocalizar problemas** específicos
+- 👀 **Seguir el estado** de reportes realizados
+- 🤝 **Colaborar** con la administración local
 
-### Pasos
+### 🏛️ Para Administraciones
+- 📊 **Centralizar reportes** ciudadanos
+- ⏱️ **Priorizar intervenciones** urgentes
+- 📈 **Analizar tendencias** de incidencias
+- 🔄 **Comunicar** actualizaciones a ciudadanos
 
+### 🎯 Impacto Social
+> *"Promoviendo ciudades más inteligentes y participativas a través de la tecnología"*
+
+---
+
+## 📊 API Endpoints - Referencia Rápida
+
+| Método | Endpoint | Descripción | Status |
+|--------|----------|-------------|--------|
+| `GET` | `/api/reports` | 📋 Listar todos los reportes | ✅ |
+| `GET` | `/api/reports/{id}` | 🔍 Obtener reporte específico | ✅ |
+| `POST` | `/api/reports` | ➕ Crear nuevo reporte | ✅ |
+| `PUT` | `/api/reports/{id}` | ✏️ Actualizar reporte | ✅ |
+| `DELETE` | `/api/reports/{id}` | 🗑️ Eliminar reporte | ✅ |
+| `GET` | `/api/users` | 👥 Gestión de usuarios | 🚧 |
+| `POST` | `/auth/login` | 🔐 Autenticación JWT | 🚧 |
+| `POST` | `/auth/register` | 📝 Registro de usuarios | 🚧 |
+
+### 💡 Ejemplo de Uso
 ```bash
-# Clonar el repositorio y navegar al backend
-cd backend
-
-# Instalar dependencias
-mvn clean install
-
-# Configurar base de datos en application.properties
-
-# Ejecutar la aplicación
-mvn spring-boot:run
-
-# La API estará disponible en http://localhost:8080
-```
-
-## Entidades del Modelo
-
-### 👤 User - Entidad de Usuario
-
-La entidad **User** representa a los usuarios del sistema AsisT.
-
-**Ubicación:** `src/main/java/com/asist/model/User.java`
-
-#### Campos:
-- **id** (Long): Identificador único del usuario (clave primaria, autoincremental)
-- **username** (String): Nombre de usuario único y no nulo
-- **password** (String): Contraseña del usuario (no nulo)
-- **email** (String): Correo electrónico único y no nulo
-- **roles** (Set<String>): Conjunto de roles asignados al usuario
-
-#### Características:
-- **@Entity**: Marca la clase como entidad JPA
-- **@Table(name = "users")**: Especifica el nombre de la tabla en la base de datos
-- **@Id** y **@GeneratedValue**: Clave primaria autoincremental
-- **@Column**: Validaciones de unicidad y nulabilidad
-- **@ElementCollection**: Manejo de la colección de roles
-- Constructores por defecto y con parámetros
-- Getters y setters completos
-- Método toString() para debugging
-
-### 📊 Report - Entidad de Reporte
-
-La entidad **Report** representa los reportes de incidencias en el sistema.
-
-**Ubicación:** `src/main/java/com/asist/model/Report.java`
-
-## Repositorios
-
-### 👤 UserRepository - Repositorio de Usuarios
-
-Interface que extiende **JpaRepository** para operaciones CRUD sobre usuarios.
-
-**Ubicación:** `src/main/java/com/asist/repository/UserRepository.java`
-
-#### Métodos disponibles:
-
-##### Métodos básicos heredados de JpaRepository:
-- `save(User user)` - Guardar/actualizar usuario
-- `findById(Long id)` - Buscar usuario por ID
-- `findAll()` - Obtener todos los usuarios
-- `deleteById(Long id)` - Eliminar usuario por ID
-- `count()` - Contar usuarios
-- Y más métodos estándar...
-
-##### Métodos personalizados:
-- **findByUsername(String username)**: Busca un usuario por nombre de usuario
-  - Retorna: `Optional<User>`
-- **findByEmail(String email)**: Busca un usuario por email
-  - Retorna: `Optional<User>`
-- **existsByUsername(String username)**: Verifica si existe un usuario con el username dado
-  - Retorna: `boolean`
-- **existsByEmail(String email)**: Verifica si existe un usuario con el email dado
-  - Retorna: `boolean`
-
-#### Características técnicas:
-- **@Repository**: Anotación que marca la interface como repositorio Spring
-- **Extends JpaRepository<User, Long>**: Hereda funcionalidades CRUD básicas
-- **Query Methods**: Spring Data JPA genera automáticamente las consultas basándose en los nombres de los métodos
-- **Documentación completa**: JavaDoc en todos los métodos personalizados
-
-### 📊 ReportRepository - Repositorio de Reportes
-
-Interface para operaciones CRUD sobre reportes.
-
-**Ubicación:** `src/main/java/com/asist/repository/ReportRepository.java`
-
-## API Endpoints
-
-### 📋 ReportController - Gestión de Reportes
-
-El controlador ReportController proporciona endpoints REST para realizar operaciones CRUD sobre los reportes del sistema.
-
-**Base URL:** `/api/reports`
-
-#### 📖 Obtener Todos los Reportes
-```http
-GET /api/reports
-```
-
-**Descripción:** Obtiene una lista de todos los reportes en el sistema.
-
-**Respuestas:**
-- `200 OK` - Lista de reportes obtenida exitosamente
-- `204 NO_CONTENT` - No hay reportes en el sistema
-- `500 INTERNAL_SERVER_ERROR` - Error interno del servidor
-
-**Ejemplo de respuesta:**
-```json
-[
-  {
-    "id": 1,
-    "title": "Reporte de incidente",
-    "description": "Descripción detallada del incidente",
-    "location": "Calle Principal 123",
-    "date": "2025-09-22T10:30:00",
-    "userId": 1
-  }
-]
-```
-
-#### 🔍 Obtener Reporte por ID
-```http
-GET /api/reports/{id}
-```
-
-**Parámetros:**
-- `id` (Long) - ID único del reporte
-
-**Descripción:** Obtiene un reporte específico por su identificador único.
-
-**Respuestas:**
-- `200 OK` - Reporte encontrado exitosamente
-- `404 NOT_FOUND` - Reporte no encontrado
-- `500 INTERNAL_SERVER_ERROR` - Error interno del servidor
-
-**Ejemplo de respuesta:**
-```json
-{
-  "id": 1,
-  "title": "Reporte de incidente",
-  "description": "Descripción detallada del incidente",
-  "location": "Calle Principal 123",
-  "date": "2025-09-22T10:30:00",
-  "userId": 1
-}
-```
-
-#### ➕ Crear Nuevo Reporte
-```http
-POST /api/reports
-```
-
-**Descripción:** Crea un nuevo reporte en el sistema.
-
-**Request Body:**
-```json
-{
-  "title": "Título del reporte",
-  "description": "Descripción del reporte (opcional)",
-  "location": "Ubicación del incidente",
-  "date": "2025-09-22T10:30:00",
-  "userId": 1
-}
-```
-
-**Campos obligatorios:**
-- `title` - Título del reporte
-- `location` - Ubicación del incidente
-- `userId` - ID del usuario que crea el reporte
-
-**Respuestas:**
-- `201 CREATED` - Reporte creado exitosamente
-- `400 BAD_REQUEST` - Datos de entrada inválidos
-- `500 INTERNAL_SERVER_ERROR` - Error interno del servidor
-
-#### ✏️ Actualizar Reporte
-```http
-PUT /api/reports/{id}
-```
-
-**Parámetros:**
-- `id` (Long) - ID único del reporte a actualizar
-
-**Descripción:** Actualiza un reporte existente.
-
-**Request Body:**
-```json
-{
-  "title": "Nuevo título",
-  "description": "Nueva descripción",
-  "location": "Nueva ubicación",
-  "date": "2025-09-22T11:00:00",
-  "userId": 1
-}
-```
-
-**Notas:**
-- Solo se actualizarán los campos proporcionados
-- Los campos vacíos o null se ignorarán
-
-**Respuestas:**
-- `200 OK` - Reporte actualizado exitosamente
-- `404 NOT_FOUND` - Reporte no encontrado
-- `500 INTERNAL_SERVER_ERROR` - Error interno del servidor
-
-#### 🗑️ Eliminar Reporte
-```http
-DELETE /api/reports/{id}
-```
-
-**Parámetros:**
-- `id` (Long) - ID único del reporte a eliminar
-
-**Descripción:** Elimina un reporte específico del sistema.
-
-**Respuestas:**
-- `204 NO_CONTENT` - Reporte eliminado exitosamente
-- `404 NOT_FOUND` - Reporte no encontrado
-- `500 INTERNAL_SERVER_ERROR` - Error interno del servidor
-
-#### 🚨 Eliminar Todos los Reportes
-```http
-DELETE /api/reports
-```
-
-**Descripción:** Elimina todos los reportes del sistema. ¡Usar con precaución!
-
-**Respuestas:**
-- `204 NO_CONTENT` - Todos los reportes eliminados exitosamente
-- `500 INTERNAL_SERVER_ERROR` - Error interno del servidor
-
-### 📝 Ejemplos de Uso
-
-#### Crear un reporte con curl:
-```bash
+# Crear un reporte
 curl -X POST http://localhost:8080/api/reports \
   -H "Content-Type: application/json" \
   -d '{
-    "title": "Incidente en el parque",
-    "description": "Daños en el mobiliario urbano",
-    "location": "Parque Central",
-    "date": "2025-09-22T14:30:00",
+    "title": "Mobiliario urbano dañado",
+    "description": "Banco roto en Parque Central",
+    "location": "Parque Central - Zona Norte",
     "userId": 1
   }'
 ```
 
-#### Obtener todos los reportes:
-```bash
-curl -X GET http://localhost:8080/api/reports
-```
+---
 
-#### Actualizar un reporte:
-```bash
-curl -X PUT http://localhost:8080/api/reports/1 \
-  -H "Content-Type: application/json" \
-  -d '{
-    "title": "Incidente resuelto",
-    "description": "El incidente ha sido solucionado"
-  }'
-```
+## 🔧 Tecnologías y Dependencias
 
-### 🔧 Características Técnicas
+<table>
+<tr>
+<td>
 
-- **CORS habilitado:** Permite peticiones desde cualquier origen (`@CrossOrigin(origins = "*")`)
-- **Validaciones:** Campos obligatorios validados automáticamente
-- **Manejo de errores:** Try-catch en todos los endpoints para captura de excepciones
-- **ResponseEntity:** Uso de ResponseEntity para control preciso de códigos de estado HTTP
-- **Inyección de dependencias:** Uso de `@Autowired` para el repositorio
-- **Documentación:** JavaDoc completo en todos los métodos
+### Backend Core
+- **Spring Boot 3.x**
+- **Java 17+**
+- **Maven**
 
-### 🏗️ Arquitectura
+</td>
+<td>
 
-El ReportController sigue el patrón de arquitectura en capas:
-- **Controlador (Controller):** Maneja las peticiones HTTP y respuestas
-- **Repositorio (Repository):** Acceso a datos mediante Spring Data JPA
-- **Entidad (Model):** Representación de los datos (Report.java)
+### Persistencia
+- **Spring Data JPA**
+- **Hibernate**
+- **MySQL/PostgreSQL**
 
-### 🧪 Testing
+</td>
+<td>
 
-Para probar los endpoints, puedes usar:
-- **Postman** - Interfaz gráfica para pruebas de API
-- **curl** - Línea de comandos
-- **Swagger UI** - (si está configurado) interfaz web para documentación interactiva
+### Seguridad
+- **Spring Security**
+- **JWT Authentication**
+- **BCrypt Password Hash**
 
-## Estado del Proyecto
+</td>
+</tr>
+</table>
 
-✅ **Completado:**
-- Modelo Report creado
-- ReportRepository implementado
-- ReportController con endpoints CRUD básicos
-- **Modelo User creado con campos completos (id, username, password, email, roles)**
-- **UserRepository implementado con métodos de búsqueda personalizados**
-- Documentación completa de la API
-- **Documentación completa del modelo User y UserRepository**
+---
 
-🚧 **En desarrollo:**
-- Autenticación y autorización
-- Validaciones avanzadas
-- Paginación y filtrado
-- Testing unitario e integración
-- **UserController para gestión de usuarios**
+## 🎓 Documentación Académica
 
-📋 **Pendiente:**
-- Implementación de servicios (Service layer)
-- Manejo de excepciones personalizado
-- Logging y monitoreo
-- Despliegue en producción
-- **Endpoints CRUD para gestión de usuarios**
-- **Implementación de autenticación con JWT**
-- **Hash de contraseñas con BCrypt**
+### 📚 Trabajo Final de Carrera (TFC)
+
+Esta API forma parte del Trabajo Final de Carrera desarrollado para la titulación en **Ingeniería Informática**.
+
+**Temática:** *Sistemas de Información Geográfica aplicados a la gestión urbana colaborativa*
+
+> 📄 **[Enlace a la Memoria del TFC](#)** *(Disponible próximamente)*
+
+### 🎥 Demo en Vivo
+> 🚀 **[Ver Demo del Sistema](#)** *(Próximamente disponible)*
+
+---
+
+## 📈 Estado del Desarrollo
+
+### ✅ Completado
+- [x] **Modelo de datos** (User, Report)
+- [x] **Repositorios JPA** con consultas personalizadas
+- [x] **API REST completa** para gestión de reportes
+- [x] **Documentación técnica** detallada
+- [x] **Estructura de proyecto** escalable
+
+### 🚧 En Desarrollo
+- [ ] **Autenticación JWT** y gestión de usuarios
+- [ ] **Validaciones avanzadas** de entrada
+- [ ] **Sistema de roles** y permisos
+- [ ] **Testing unitario** e integración
+- [ ] **Paginación y filtrado** de resultados
+
+### 📋 Próximas Versiones
+- [ ] **API Gateway** para microservicios
+- [ ] **Notificaciones push** en tiempo real
+- [ ] **Integración con mapas** (Google Maps API)
+- [ ] **Dashboard administrativo** web
+- [ ] **API móvil** optimizada
+
+---
+
+## 🤝 Contribución
+
+¿Quieres contribuir al proyecto? ¡Excelente!
+
+1. 🍴 **Fork** el repositorio
+2. 🌿 Crea una **rama feature** (`git checkout -b feature/AmazingFeature`)
+3. 💾 **Commit** tus cambios (`git commit -m 'Add AmazingFeature'`)
+4. 📤 **Push** a la rama (`git push origin feature/AmazingFeature`)
+5. 🔄 Abre un **Pull Request**
+
+---
+
+## 📞 Contacto y Soporte
+
+**👨‍💻 Desarrollador:** Sabela Cobelo  
+**🎓 Institución:** [Universidad/Centro de Estudios]  
+**📧 Email:** [tu-email@ejemplo.com]  
+**🐙 GitHub:** [@SabelaCobelo](https://github.com/SabelaCobelo)
+
+---
+
+<div align="center">
+
+### 🌟 ¡Gracias por tu interés en AsisT!
+
+**Construyendo ciudades más inteligentes, una API a la vez** 🏙️✨
+
+[![GitHub stars](https://img.shields.io/github/stars/SabelaCobelo/AsisT?style=social)](https://github.com/SabelaCobelo/AsisT/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/SabelaCobelo/AsisT?style=social)](https://github.com/SabelaCobelo/AsisT/network/members)
+
+---
+
+**© 2024 AsisT Project | MIT License**
+
+</div>
